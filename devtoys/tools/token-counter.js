@@ -63,10 +63,10 @@ window.mountTool_token_counter = function (containerId) {
                             CLI Token Counter
                         </h3>
                         <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">
-                            Want to count tokens directly from your terminal? Since GitHub Pages is a static host (no server-side JS rendering for cURL), use our lightweight open-source Node.js helper script.
+                            Want to count tokens directly from your terminal? You can pipe our static CLI tool straight into Node, no installation required!
                         </p>
                         <div style="background-color: #1e1e1e; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; position: relative; overflow-x: auto;">
-                            <code style="color: #4ade80; font-family: monospace; font-size: 0.875rem; white-space: pre;">node token-cli.js "Your text here"</code>
+                            <code style="color: #4ade80; font-family: monospace; font-size: 0.875rem; white-space: pre;">curl -sL https://zrohyun.github.io/devtoys/tools/token-cli.js | node - "Your text here"</code>
                         </div>
                         <button id="tc-btn-download-cli" class="btn btn-secondary" style="width: 100%;">
                             <i data-lucide="download"></i> Download CLI Script

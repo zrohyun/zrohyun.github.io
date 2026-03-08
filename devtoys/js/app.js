@@ -12,12 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.innerHTML = `
 <pre>
 DevToys Token Counter CLI helper:
-To count tokens directly from your terminal, download the 'token-cli.js' script from DevToys, then use:
+Did you know you can count tokens directly via cURL without downloading anything?
 
-node token-cli.js "Your text here"
-cat file.txt | node token-cli.js
+Try running this in your terminal:
+curl -sL https://zrohyun.github.io/devtoys/tools/token-cli.js | node - "Your text here"
 
-(We rely on local Node.js for terminal usage since GitHub Pages does not support server-side rendering)
+Or redirect a file to it:
+cat yourfile.txt | node <(curl -sL https://zrohyun.github.io/devtoys/tools/token-cli.js)
+
+(Since GitHub Pages is purely static, we route you to this powerful Node helper!)
 </pre>`;
         return;
     }
