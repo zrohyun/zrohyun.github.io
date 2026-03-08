@@ -7,6 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Lucide icons
     lucide.createIcons();
 
+    // Intercept Curl requests early (only works if executed, but good for demo/concept)
+    if (navigator.userAgent.toLowerCase().includes('curl') || navigator.userAgent.toLowerCase().includes('wget')) {
+        document.body.innerHTML = `
+<pre>
+DevToys Token Counter CLI helper:
+To count tokens for a string from your terminal, use:
+npx -y gpt-tokenizer "Your text here"
+
+To count tokens from a file:
+cat file.txt | npx -y gpt-tokenizer
+</pre>`;
+        return;
+    }
+
     const App = {
         state: {
             currentTheme: localStorage.getItem('theme') || 'light',

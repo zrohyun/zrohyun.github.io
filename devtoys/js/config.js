@@ -14,6 +14,7 @@ const TOOLBOX_CONFIG = {
                 { id: 'xml-formatter', name: 'XML Formatter', description: 'Format and prettify XML documents.' },
                 { id: 'sql-formatter', name: 'SQL Formatter', description: 'Format SQL queries with proper indentation.' },
                 { id: 'text-diff', name: 'Text Diff Checker', description: 'Compare two text blocks and highlight differences.' },
+                { id: 'token-counter', name: 'Token Counter (AI)', description: 'Approximate text tokens for LLMs (GPT, Claude, etc).' },
                 { id: 'word-counter', name: 'Word Counter', description: 'Count characters, words, lines and paragraphs.' },
                 { id: 'case-converter', name: 'Text Case Converter', description: 'Convert text between UPPERCASE, lowercase, camelCase, etc.' },
                 { id: 'whitespace-remover', name: 'Whitespace Remover', description: 'Remove extra spaces, tabs and line breaks.' }
