@@ -9,16 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Intercept Curl requests early (only works if executed, but good for demo/concept)
     if (navigator.userAgent.toLowerCase().includes('curl') || navigator.userAgent.toLowerCase().includes('wget')) {
+        let baseUrl = window.location.href.split('#')[0];
+        if (baseUrl.endsWith('/index.html')) baseUrl = baseUrl.slice(0, -11);
+        if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
+        const scriptUrl = baseUrl + '/tools/token-cli.js';
         document.body.innerHTML = `
 <pre>
 DevToys Token Counter CLI helper:
 Did you know you can count tokens directly via cURL without downloading anything?
 
 Try running this in your terminal:
-curl -sL https://zrohyun.github.io/devtoys/tools/token-cli.js | node - "Your text here"
+curl -sL ${scriptUrl} | node - "Your text here"
 
 Or redirect a file to it:
-cat yourfile.txt | node <(curl -sL https://zrohyun.github.io/devtoys/tools/token-cli.js)
+cat yourfile.txt | node <(curl -sL ${scriptUrl})
 
 (Since GitHub Pages is purely static, we route you to this powerful Node helper!)
 </pre>`;

@@ -39,6 +39,6 @@ if (args.length > 0 && args[0] !== '-') {
     console.log('Usage:');
     console.log('  node token-cli.js "Your text here"');
     console.log('  cat file.txt | node token-cli.js');
-    console.log('  curl -sL https://zrohyun.github.io/devtoys/tools/token-cli.js | node - "Your text here"');
+    console.log('  curl -sL [URL_TO_SCRIPT] | node - "Your text here"');
     process.exit(1);
 }

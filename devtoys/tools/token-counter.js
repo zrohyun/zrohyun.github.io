@@ -71,7 +71,7 @@ window.mountTool_token_counter = function (containerId) {
                             Want to count tokens directly from your terminal? You can pipe our static CLI tool straight into Node, no installation required!
                         </p>
                         <div style="background-color: #1e1e1e; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; position: relative; overflow-x: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
-                            <code id="tc-cli-code" style="color: #4ade80; font-family: monospace; font-size: 0.875rem; white-space: pre;">curl -sL https://zrohyun.github.io/devtoys/tools/token-cli.js | node - "Your text here"</code>
+                            <code id="tc-cli-code" style="color: #4ade80; font-family: monospace; font-size: 0.875rem; white-space: pre;">curl -sL [URL]/tools/token-cli.js | node - "Your text here"</code>
                             <button id="tc-btn-copy-cli" class="btn-copy-sm" style="color: #888;" title="Copy Command">
                                 <i data-lucide="copy" style="width: 1rem; height: 1rem;"></i>
                             </button>
@@ -97,6 +97,13 @@ window.mountTool_token_counter = function (containerId) {
     const btnDownloadCli = document.getElementById('tc-btn-download-cli');
     const btnCopyTokens = document.getElementById('tc-btn-copy-tokens');
     const btnCopyCli = document.getElementById('tc-btn-copy-cli');
+
+    const cliCodeElem = document.getElementById('tc-cli-code');
+    let baseUrl = window.location.href.split('#')[0];
+    if (baseUrl.endsWith('/index.html')) baseUrl = baseUrl.slice(0, -11);
+    if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
+    const scriptUrl = baseUrl + '/tools/token-cli.js';
+    cliCodeElem.textContent = `curl -sL ${scriptUrl} | node - "Your text here"`;
 
     // Setup GPT tokenizer lazily using js-tiktoken CDN
     let encodeHtml = null;
