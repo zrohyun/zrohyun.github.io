@@ -1,5 +1,5 @@
 /**
- * Web ToolBox - Core Application Logic
+ * DevToys - Core Application Logic
  * Handles Routing, Theme toggling, Sidebar generation, and Tool initialization.
  */
 

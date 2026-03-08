@@ -1,5 +1,5 @@
 /**
- * Web ToolBox - Global Search & Application Configuration
+ * DevToys - Global Search & Application Configuration
  * Defines all categories and tools available in the application.
  */
 
