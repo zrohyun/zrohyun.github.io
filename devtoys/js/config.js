@@ -53,13 +53,29 @@ const TOOLBOX_CONFIG = {
             ]
         },
         {
-            id: 'generators',
-            name: 'Generation Tools',
-            icon: 'wand-2',
+            id: 'media-tools',
+            name: 'Media Tools',
+            icon: 'image',
             tools: [
-                { id: 'uuid-generator', name: 'UUID/GUID Generator', description: 'Generate secure random UUIDs v4.' },
-                { id: 'password-generator', name: 'Password Generator', description: 'Generate strong and secure passwords.' },
-                { id: 'qr-generator', name: 'QR Code Generator', description: 'Create QR codes from text or URLs.' }
+                { id: 'image-base64', name: 'Image Base64 Converter', description: 'Convert images to Base64 data URIs and back.' }
+            ]
+        },
+        {
+            id: 'validation-network',
+            name: 'Validation & Network',
+            icon: 'check-circle',
+            tools: [
+                { id: 'credit-card-validator', name: 'Credit Card Validator', description: 'Validate credit card numbers using Luhn algorithm.' }
+            ]
+        },
+        {
+            id: 'calculators-time',
+            name: 'Calculators & Time',
+            icon: 'calculator',
+            tools: [
+                { id: 'aspect-ratio', name: 'Aspect Ratio Calculator', description: 'Calculate dimensions based on aspect ratios.' },
+                { id: 'rem-px', name: 'REM / PX Converter', description: 'Convert between CSS REM and Pixel values.' },
+                { id: 'epoch-converter', name: 'Epoch Converter', description: 'Convert Unix epoch timestamps to human readable dates.' }
             ]
         }
     ]
