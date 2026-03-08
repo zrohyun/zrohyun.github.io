@@ -66,7 +66,7 @@ window.mountTool_token_counter = function (containerId) {
                             Want to count tokens directly from your terminal? Since GitHub Pages is a static host (no server-side JS rendering for cURL), use our lightweight open-source Node.js helper script.
                         </p>
                         <div style="background-color: #1e1e1e; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; position: relative; overflow-x: auto;">
-                            <code style="color: #4ade80; font-family: monospace; font-size: 0.875rem; white-space: pre;">npx devtoys-token-cli "Your text here"</code>
+                            <code style="color: #4ade80; font-family: monospace; font-size: 0.875rem; white-space: pre;">node token-cli.js "Your text here"</code>
                         </div>
                         <button id="tc-btn-download-cli" class="btn btn-secondary" style="width: 100%;">
                             <i data-lucide="download"></i> Download CLI Script
@@ -177,18 +177,42 @@ window.mountTool_token_counter = function (containerId) {
         "#!/usr/bin/env node",
         "/**",
         " * DevToys Token Counter CLI",
-        " * Lightweight terminal utility using gpt-tokenizer to count text tokens offline.",
+        " * Approximate token counter for local terminal use.",
         " *",
         " * Usage:",
         " *   node token-cli.js 'Some inline text'",
         " *   cat file.txt | node token-cli.js",
         " */",
         "",
-        "console.log('DevToys Token Counter Helpers');",
-        "console.log('For exact GPT-4 tokens, run: npx -y gpt-tokenizer \\\\'Text\\\\'');",
-        "console.log('');",
-        "console.log('To count from file:');",
-        "console.log('cat file.txt | npx -y gpt-tokenizer');"
+        "const fs = require('fs');",
+        "function countTokens(text) {",
+        "    let count = 0;",
+        "    for (let i = 0; i < text.length; i++) {",
+        "        const code = text.charCodeAt(i);",
+        "        if (code > 255) count += 2.5;",
+        "        else count += 0.25;",
+        "    }",
+        "    return Math.ceil(count);",
+        "}",
+        "function printStats(text) {",
+        "   console.log('--- DevToys Local Token Counter ---');",
+        "   console.log(`Tokens (approx): ${countTokens(text)}`);",
+        "   console.log(`Characters:      ${text.length}`);",
+        "   console.log(`Words:           ${text.trim().split(/\\\\s+/).filter(w => w.length > 0).length}`);",
+        "}",
+        "",
+        "if (!process.stdin.isTTY) {",
+        "    let inputData = '';",
+        "    process.stdin.on('data', chunk => inputData += chunk);",
+        "    process.stdin.on('end', () => printStats(inputData));",
+        "} else {",
+        "    const args = process.argv.slice(2);",
+        "    if (args.length === 0) {",
+        "        console.log('Usage: node token-cli.js \\"Your text here\\"');",
+        "        process.exit(1);",
+        "    }",
+        "    printStats(args.join(' '));",
+        "}"
     ].join('\\n');
 
     btnDownloadCli.addEventListener('click', () => {

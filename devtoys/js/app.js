@@ -12,11 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.innerHTML = `
 <pre>
 DevToys Token Counter CLI helper:
-To count tokens for a string from your terminal, use:
-npx -y gpt-tokenizer "Your text here"
+To count tokens directly from your terminal, download the 'token-cli.js' script from DevToys, then use:
 
-To count tokens from a file:
-cat file.txt | npx -y gpt-tokenizer
+node token-cli.js "Your text here"
+cat file.txt | node token-cli.js
+
+(We rely on local Node.js for terminal usage since GitHub Pages does not support server-side rendering)
 </pre>`;
         return;
     }
