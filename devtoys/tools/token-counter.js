@@ -37,7 +37,12 @@ window.mountTool_token_counter = function (containerId) {
                         
                         <div style="display: flex; flex-direction: column; gap: 1rem;">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span style="color: var(--text-secondary); font-size: 0.875rem;">Tokens (Approx.)</span>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: var(--text-secondary); font-size: 0.875rem;">GPT-4 Tokens</span>
+                                    <button id="tc-btn-copy-tokens" class="btn-copy-sm" title="Copy Token Count">
+                                        <i data-lucide="copy" style="width: 1rem; height: 1rem;"></i>
+                                    </button>
+                                </div>
                                 <span id="tc-stat-tokens" style="font-size: 1.5rem; font-weight: 700; color: var(--accent-primary);">0</span>
                             </div>
                             <div style="height: 1px; background-color: var(--border-color);"></div>
@@ -52,7 +57,7 @@ window.mountTool_token_counter = function (containerId) {
                         </div>
                         
                         <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px dashed var(--border-color); font-size: 0.75rem; color: var(--text-tertiary); line-height: 1.4;">
-                            * Using a standard gpt-tokenizer approximation algorithm. 1 token ≈ 4 characters for English text.
+                            * The Web UI uses OpenAI's exact <strong>cl100k_base</strong> (GPT-4) tokenizer via <a href="https://github.com/niieani/gpt-tokenizer" target="_blank" style="color: var(--accent-primary);">gpt-tokenizer</a>.
                         </div>
                     </div>
 
@@ -65,8 +70,11 @@ window.mountTool_token_counter = function (containerId) {
                         <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">
                             Want to count tokens directly from your terminal? You can pipe our static CLI tool straight into Node, no installation required!
                         </p>
-                        <div style="background-color: #1e1e1e; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; position: relative; overflow-x: auto;">
-                            <code style="color: #4ade80; font-family: monospace; font-size: 0.875rem; white-space: pre;">curl -sL https://zrohyun.github.io/devtoys/tools/token-cli.js | node - "Your text here"</code>
+                        <div style="background-color: #1e1e1e; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; position: relative; overflow-x: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                            <code id="tc-cli-code" style="color: #4ade80; font-family: monospace; font-size: 0.875rem; white-space: pre;">curl -sL https://zrohyun.github.io/devtoys/tools/token-cli.js | node - "Your text here"</code>
+                            <button id="tc-btn-copy-cli" class="btn-copy-sm" style="color: #888;" title="Copy Command">
+                                <i data-lucide="copy" style="width: 1rem; height: 1rem;"></i>
+                            </button>
                         </div>
                         <button id="tc-btn-download-cli" class="btn btn-secondary" style="width: 100%;">
                             <i data-lucide="download"></i> Download CLI Script
@@ -87,6 +95,8 @@ window.mountTool_token_counter = function (containerId) {
     const btnClear = document.getElementById('tc-btn-clear');
     const btnPaste = document.getElementById('tc-btn-paste');
     const btnDownloadCli = document.getElementById('tc-btn-download-cli');
+    const btnCopyTokens = document.getElementById('tc-btn-copy-tokens');
+    const btnCopyCli = document.getElementById('tc-btn-copy-cli');
 
     // Setup GPT tokenizer lazily using js-tiktoken CDN
     let encodeHtml = null;
@@ -169,6 +179,27 @@ window.mountTool_token_counter = function (containerId) {
             console.error('Failed to read clipboard contents: ', err);
             alert("Unable to access clipboard. Please paste manually.");
         }
+    });
+
+    btnCopyTokens.addEventListener('click', function () {
+        if (statTokens.textContent !== "0") {
+            navigator.clipboard.writeText(statTokens.textContent.replace(/,/g, ''));
+            const ref = this;
+            const orig = ref.innerHTML;
+            ref.innerHTML = `<i data-lucide="check" style="width:1rem;height:1rem;color: var(--success)"></i>`;
+            lucide.createIcons({ root: ref.parentElement });
+            setTimeout(() => { ref.innerHTML = orig; lucide.createIcons({ root: ref.parentElement }); }, 2000);
+        }
+    });
+
+    btnCopyCli.addEventListener('click', function () {
+        const codeText = document.getElementById('tc-cli-code').textContent;
+        navigator.clipboard.writeText(codeText);
+        const ref = this;
+        const orig = ref.innerHTML;
+        ref.innerHTML = `<i data-lucide="check" style="width:1rem;height:1rem;color: #4ade80"></i>`;
+        lucide.createIcons({ root: ref.parentElement });
+        setTimeout(() => { ref.innerHTML = orig; lucide.createIcons({ root: ref.parentElement }); }, 2000);
     });
 
 
