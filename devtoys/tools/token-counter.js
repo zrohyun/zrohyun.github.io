@@ -208,12 +208,12 @@ window.mountTool_token_counter = function (containerId) {
         "} else {",
         "    const args = process.argv.slice(2);",
         "    if (args.length === 0) {",
-        "        console.log('Usage: node token-cli.js \"Your text here\"');",
+        "        console.log('Usage: node token-cli.js \\'Your text here\\'');",
         "        process.exit(1);",
         "    }",
         "    printStats(args.join(' '));",
         "}"
-    ].join('\\n');
+    ].join("\\n");
 
     btnDownloadCli.addEventListener('click', () => {
         const blob = new Blob([cliScriptContent], { type: 'text/javascript' });
