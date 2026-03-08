@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const App = {
         state: {
-            currentTheme: localStorage.getItem('theme') || 'dark',
+            currentTheme: localStorage.getItem('theme') || 'light',
             currentToolId: location.hash.replace('#', '') || null,
         },
 

@@ -11,6 +11,8 @@ const TOOLBOX_CONFIG = {
             icon: 'type',
             tools: [
                 { id: 'json-formatter', name: 'JSON Formatter', description: 'Format, validate and nicely print JSON data.' },
+                { id: 'xml-formatter', name: 'XML Formatter', description: 'Format and prettify XML documents.' },
+                { id: 'sql-formatter', name: 'SQL Formatter', description: 'Format SQL queries with proper indentation.' },
                 { id: 'text-diff', name: 'Text Diff Checker', description: 'Compare two text blocks and highlight differences.' },
                 { id: 'word-counter', name: 'Word Counter', description: 'Count characters, words, lines and paragraphs.' },
                 { id: 'case-converter', name: 'Text Case Converter', description: 'Convert text between UPPERCASE, lowercase, camelCase, etc.' },
@@ -25,7 +27,8 @@ const TOOLBOX_CONFIG = {
                 { id: 'base64-encode', name: 'Base64 Encode', description: 'Encode text or data to Base64 format.' },
                 { id: 'base64-decode', name: 'Base64 Decode', description: 'Decode Base64 format back to text.' },
                 { id: 'url-encode', name: 'URL Encode/Decode', description: 'Encode or decode URL characters safely.' },
-                { id: 'jwt-decoder', name: 'JWT Decoder', description: 'Decode and inspect JSON Web Tokens.' }
+                { id: 'jwt-decoder', name: 'JWT Decoder', description: 'Decode and inspect JSON Web Tokens.' },
+                { id: 'html-escape', name: 'HTML Escape/Unescape', description: 'Convert characters to HTML entities and back.' }
             ]
         },
         {
@@ -34,7 +37,9 @@ const TOOLBOX_CONFIG = {
             icon: 'arrow-right-left',
             tools: [
                 { id: 'csv-to-json', name: 'CSV to JSON', description: 'Convert CSV formatted text into JSON.' },
-                { id: 'json-to-csv', name: 'JSON to CSV', description: 'Convert JSON arrays into CSV format.' }
+                { id: 'json-to-csv', name: 'JSON to CSV', description: 'Convert JSON arrays into CSV format.' },
+                { id: 'ascii-hex-converter', name: 'ASCII ↔ HEX', description: 'Convert text between ASCII and HEX representation.' },
+                { id: 'number-base', name: 'Number Base Converter', description: 'Convert numbers across Binary, Octal, Decimal and Hex.' }
             ]
         },
         {
@@ -61,6 +66,6 @@ const TOOLBOX_CONFIG = {
 };
 
 // Flatten tools list for global search and routing
-const ALL_TOOLS = TOOLBOX_CONFIG.categories.flatMap(cat => 
-    cat.tools.map(tool => ({...tool, categoryId: cat.id, categoryName: cat.name}))
+const ALL_TOOLS = TOOLBOX_CONFIG.categories.flatMap(cat =>
+    cat.tools.map(tool => ({ ...tool, categoryId: cat.id, categoryName: cat.name }))
 );
